@@ -1,13 +1,23 @@
 package com.example.Bookstore.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Book {
+    @Id
+    private String isbn;
+
     private String title;
     private String author;
     private int year;
-    private int isbn;
-    private float price;
+    private double price;
 
-    public Book(String title, String author, int year, int isbn, float price) {
+    public Book() {}
+
+    public Book(String title, String author, int year, String isbn, double price) {
         this.title = title;
         this.author = author;
         this.year = year;
@@ -27,11 +37,11 @@ public class Book {
         return year;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -47,11 +57,18 @@ public class Book {
         this.year = year;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "ISBN : " + isbn + ", '" + title + "'" +
+                ", made by '" + author + '\'' +
+                ", in " + year + ". Price : " + price + '.';
     }
 }
