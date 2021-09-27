@@ -1,9 +1,6 @@
 package com.example.Bookstore.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Book {
@@ -15,14 +12,19 @@ public class Book {
     private int year;
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+
     public Book() {}
 
-    public Book(String title, String author, int year, String isbn, double price) {
+    public Book(String isbn, String title, String author, int year, double price, Category category) {
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.year = year;
-        this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }
 
     public String getTitle() {
@@ -45,6 +47,10 @@ public class Book {
         return price;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -65,10 +71,15 @@ public class Book {
         this.price = price;
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "ISBN : " + isbn + ", '" + title + "'" +
                 ", made by '" + author + '\'' +
-                ", in " + year + ". Price : " + price + '.';
+                ", in " + year + ". Price : " + price + '.' +
+                " Category : " + category;
     }
 }
