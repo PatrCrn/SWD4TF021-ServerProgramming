@@ -5,6 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" /></head>
 <body>
+	<div style="margin:10px;">
+		<p th:inline="text" style="display: inline">Hello [[${#httpServletRequest.remoteUser}]]!</p>
+		<form th:action="@{/logout}" method="post" style="display: inline">
+			<input type="submit" value="Sign Out"/>
+		</form>
+	</div>
+
 	<h1 style="text-align: center">Books</h1>
     <table class="table table-striped">
 		<tr>
